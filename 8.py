@@ -1,18 +1,18 @@
 import helper
 
-data = helper.get_input(8).split("\n")
+d = helper.get_input(8).split("\n")
 
-print((fun:= lambda i, acc, visited: acc if i in visited else fun(*{
-        "nop": lambda i, acc, val: (i+1, acc),
-        "acc": lambda i, acc, val: (i+1, acc + int(val)),
-        "jmp": lambda i, acc, val: (i+int(val), acc)
-        }[data[i][:3]](i, acc, data[i][3:]), visited | {i}))(0, 0, set()))
+print((f:= lambda i, a, v: a if i in v else f(*{
+        "n": lambda i, a, w: (i+1, a),
+        "a": lambda i, a, w: (i+1, a + int(w)),
+        "j": lambda i, a, w: (i+int(w), a)
+        }[d[i][0]](i, a, d[i][3:]), v | {i}))(0, 0, set()))
 # 1928
 
-print(max([(fun:= lambda i, acc, visited, inst: (i, acc) if i in visited else fun(*{
-        "nop": lambda i, acc, val: (i+1, acc),
-        "acc": lambda i, acc, val: (i+1, acc + int(val)),
-        "jmp": lambda i, acc, val: (i+int(val), acc),
-        "": lambda i, acc, val: (i, acc)
-        }[inst[i][:3]](i, acc, inst[i][3:]), visited | {i}, inst))(0, 0, set(), data[:i] + [["nop", "jmp"][line[:3]=="nop"] + line[3:]] + data[i+1:]) for i, line in enumerate(data[:-1])])[1])
+print(max([(f:= lambda i, a, v, c: (i, a) if i in v else f(*{
+        "n": lambda i, a, w: (i+1, a),
+        "a": lambda i, a, w: (i+1, a + int(w)),
+        "j": lambda i, a, w: (i+int(w), a),
+        "": lambda i, a, w: (i, a)
+        }[c[i][:1]](i, a, c[i][3:]), v | {i}, c))(0, 0, set(), d[:i] + [["nop", "jmp"][l[0]=="n"] + l[3:]] + d[i+1:]) for i, l in enumerate(d[:-1])])[1])
 # 1319
