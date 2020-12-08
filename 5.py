@@ -1,9 +1,9 @@
 import helper
 
-data = helper.get_input(5).split("\n")[:-1]
+data = helper.get_input(5)
 
-print(max(8 * int(code[:7].translate(str.maketrans("BF", "10")), 2) + int(code[7:].translate(str.maketrans("RL", "10")), 2) for code in data))
+print(max(8 * int(code[:7], 2) + int(code[7:], 2) for code in data.translate(str.maketrans("BFRL", "1010")).split("\n")[:-1]))
 # 998
 
-print((start:=-100)*0 + (temp := sorted([8 * int(code[:7].translate(str.maketrans("BF", "10")), 2) + int(code[7:].translate(str.maketrans("RL", "10")), 2) for code in data]))[[start - (start:=seat) for seat in (temp)].index(-2)]-1)
-# 676
+print((seats := sorted(8 * int(code[:7], 2) + int(code[7:], 2) for code in data.translate(str.maketrans("BFRL", "1010")).split("\n")[:-1]))[[x - min(seats) - i for i, x in enumerate(seats)].index(1)]-1)
+# 976
