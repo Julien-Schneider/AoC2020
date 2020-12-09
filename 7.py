@@ -1,11 +1,11 @@
 import helper
-import re
-from functools import lru_cache
+from re import findall as s
+from functools import lru_cache as l
 
-data = helper.get_input(7)
+d = helper.get_input(7)
 
-print(len(set((fun:= lambda name: "|".join(matches) + "|" + "|".join(fun(x) for x in matches) if (matches:= re.findall(r"(.+) bags contain.*{name}".format(name=name), data)) else name)("shiny gold").split("|"))))
+print(len(set((f:= lambda n: "|".join(m) + "|" + "|".join(f(x) for x in m) if (m:= s(r"(.+) bags con.*{n}".format(n=n), d)) else n)("shiny gold").split("|"))))
 # 272
 
-print(lru_cache((fun:= lambda name: sum([int(count) * (fun(bag) + 1) for count, bag in contains[name]]) if (contains:= {target: re.findall(r"(\d)+ ([\w\s]+) bags?", rules) for target, rules in [x.split(" bags contain ") for x in data.split("\n")[:-1]]})[name] else 0))("shiny gold"))
+print(l((f:= lambda n: sum([int(c) * (f(b) + 1) for c, b in e[n]]) if (e:= {t: s(r"(\d)+ ([\w\s]+) bags?", r) for t, r in [x.split(" bags con") for x in d.split("\n")[:-1]]})[n] else 0))("shiny gold"))
 # 172246
